@@ -1,11 +1,12 @@
 <template>
     <div class="game">
         <h2>Game</h2>
-        <p>Game content goes here...</p>
+        <GameComponent />
     </div>
 </template>
 
 <script setup>
+import GameComponent from '@/components/GameComponent.vue'
 </script>
 
 <style scoped>
