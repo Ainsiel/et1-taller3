@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 const store = createStore({
   state: {
-    user: null
+    user: null,
+    records: []
   },
   mutations: {
     setUser(state, user) {
@@ -10,7 +11,10 @@ const store = createStore({
     },
     logout(state) {
       state.user = null
-    }
+    },
+    setRecords(state, record) {
+      state.records = [...state.records, record]
+    },
   },
   actions: {
     login({ commit }, user) {
@@ -18,11 +22,15 @@ const store = createStore({
     },
     logout({ commit }) {
       commit('logout')
-    }
+    },
+    records({ commit }, record) {
+      commit('setRecords', record)
+    },
   },
 
   getters: {
-    user: (state) => state.user
+    user: (state) => state.user,
+    records: (state) => state.records,
   }
 })
 

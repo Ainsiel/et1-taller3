@@ -1,4 +1,7 @@
 <template>
+    <div>
+        <NavbarComponent />
+    </div>
     <div class="game">
         <div v-if="isSelectingCharacter" class="container d-flex flex-column justify-content-center align-items-center w-100" style="height: 100vh;">
             <div class="d-flex flex-column justify-content-center w-100" >
@@ -33,6 +36,7 @@ import GameComponent from '@/components/GameComponent.vue'
 import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex';
 import { users } from '@/assets/users.js';
+import NavbarComponent from '@/components/NavbarComponent.vue'
 
 const store = useStore();
 

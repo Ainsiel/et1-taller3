@@ -24,6 +24,7 @@
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 import { Character } from '@/assets/character';
 import backgroundImage from '@/assets/background.png';
+import { useStore } from 'vuex';
 
 
 const props = defineProps({
@@ -33,6 +34,7 @@ const props = defineProps({
     character2: String,
 })
 
+const store = useStore();
 
 const canvasRef = ref(null);
 const hero = ref(null);
@@ -76,10 +78,6 @@ const drawCharacter = (character, sprite, isFacingRight) => {
 
     let spritesheet = new Image();
     spritesheet.src = sprite
-
-    console.log('Test: ', sprite)
-    console.log('Test: ', spritesheet)
-    console.log('Test: ', spritesheet.src)
 
     const scale = isFacingRight ? 1 : -1
     ctx.save(); // Guarda el estado del contexto
@@ -222,10 +220,37 @@ const gameLoop = () => {
         let message;
         if (!hero.value.isAlive() && !limo.value.isAlive()) {
             message = "Ambos personajes han perdido.";
+            store.dispatch('records',
+                {
+                    u1: props.username1,
+                    ch1: props.character1,
+                    u1Won: false,
+                    u2: props.username2,
+                    ch2: props.character2,
+                    u2Won: false,
+                })
         } else if (!hero.value.isAlive()) {
             message = `El personaje ${limo.value.name} ha ganado!`;
+            store.dispatch('records',
+                {
+                    u1: props.username1,
+                    ch1: props.character1,
+                    u1Won: false,
+                    u2: props.username2,
+                    ch2: props.character2,
+                    u2Won: true,
+                })
         } else {
             message = `El personaje ${hero.value.name} ha ganado!`;
+            store.dispatch('records',
+                {
+                    u1: props.username1,
+                    ch1: props.character1,
+                    u1Won: true,
+                    u2: props.username2,
+                    ch2: props.character2,
+                    u2Won: false,
+                })
         }
 
         // Muestra un mensaje de alerta de quien ha ganado
@@ -246,10 +271,10 @@ onMounted(() => {
     const heroAttk = Math.floor(Math.random() * 6) + 5;
     const enemyAttk = Math.floor(Math.random() * 6) + 5;
 
-    
+
     character1Sprite.value = `src/assets/${props.character1}/Idle-Sheet.png`
 
-    character2Sprite.value =`src/assets/${props.character2}/Idle-Sheet.png`
+    character2Sprite.value = `src/assets/${props.character2}/Idle-Sheet.png`
 
     hero.value = new Character(50, 50, window.innerHeight * 0.1, window.innerHeight * 0.1, 'blue', props.username1, heroMaxHealth, heroAttk);
 

@@ -30,7 +30,7 @@ const login = () => {
     const user = users.find(u => u.username === username.value && u.password === password.value);
     if (user) {
         store.dispatch('login', user);
-        router.push({ name: 'home' });
+        router.push({ name: 'wiki' });
     } else {
         alert('Invalid username or password');
     }
