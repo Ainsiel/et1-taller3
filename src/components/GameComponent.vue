@@ -1,7 +1,7 @@
 <template>
     <div>
         <canvas ref="canvasRef"></canvas>
-        <div class="d-flex w-full justify-content-between" >
+        <div class="d-flex w-full justify-content-between">
             <div v-if="hero">
                 <h3>{{ hero.name }}</h3>
                 <div class="healthBar">
@@ -24,8 +24,15 @@
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 import { Character } from '@/assets/character';
 import backgroundImage from '@/assets/background.png';
-import knightSheet from '@/assets/knight/Idle-Sheet.png';
-import orcSheet from '@/assets/orc/Idle-Sheet.png';
+
+
+const props = defineProps({
+    username1: String,
+    username2: String,
+    character1: String,
+    character2: String,
+})
+
 
 const canvasRef = ref(null);
 const hero = ref(null);
@@ -44,14 +51,13 @@ const attackInterval = 700;
 let background = new Image();
 background.src = backgroundImage;
 
-let knightSprite = new Image();
-knightSprite.src = knightSheet;
 
-let orcSprite = new Image();
-orcSprite.src = orcSheet;
+const character1Sprite = ref(null)
+const character2Sprite = ref(null)
 
-const frameWidth = 32; // Assuming each frame in the spritesheet is 64px wide
-const frameHeight = 32; // Assuming each frame in the spritesheet is 64px tall
+
+const frameWidth = 32;
+const frameHeight = 32;
 const totalFrames = 4; // Total frames in the spritesheet
 let currentFrame = 0;
 
@@ -68,10 +74,17 @@ const drawCharacter = (character, sprite, isFacingRight) => {
     const sx = currentFrame * frameWidth;
     const sy = 0;
 
+    let spritesheet = new Image();
+    spritesheet.src = sprite
+
+    console.log('Test: ', sprite)
+    console.log('Test: ', spritesheet)
+    console.log('Test: ', spritesheet.src)
+
     const scale = isFacingRight ? 1 : -1
     ctx.save(); // Guarda el estado del contexto
     ctx.scale(scale, 1); // Refleja horizontalmente el personaje si no está mirando hacia la derecha
-    ctx.drawImage(sprite, sx, sy, frameWidth, frameHeight, isFacingRight ? character.x : -character.x - character.width, character.y, character.width, character.height);
+    ctx.drawImage(spritesheet, sx, sy, frameWidth, frameHeight, isFacingRight ? character.x : -character.x - character.width, character.y, character.width, character.height);
     ctx.restore(); // Restaura el estado del contexto
 };
 
@@ -80,8 +93,8 @@ const draw = () => {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBackground();
-    drawCharacter(hero.value, knightSprite, heroFacingRight.value);
-    drawCharacter(limo.value, orcSprite, limoFacingRight.value);
+    drawCharacter(hero.value, character1Sprite.value, heroFacingRight.value);
+    drawCharacter(limo.value, character2Sprite.value, limoFacingRight.value);
 };
 
 const checkCollision = (character1, character2) => {
@@ -233,9 +246,14 @@ onMounted(() => {
     const heroAttk = Math.floor(Math.random() * 6) + 5;
     const enemyAttk = Math.floor(Math.random() * 6) + 5;
 
-    hero.value = new Character(50, 50, window.innerHeight * 0.1, window.innerHeight * 0.1, 'blue', "Heroe", heroMaxHealth, heroAttk);
+    
+    character1Sprite.value = `src/assets/${props.character1}/Idle-Sheet.png`
 
-    limo.value = new Character(canvas.width - 100, canvas.height - 100, window.innerHeight * 0.1, window.innerHeight * 0.1, 'red', "Limo", enemyMaxHealth, enemyAttk);
+    character2Sprite.value =`src/assets/${props.character2}/Idle-Sheet.png`
+
+    hero.value = new Character(50, 50, window.innerHeight * 0.1, window.innerHeight * 0.1, 'blue', props.username1, heroMaxHealth, heroAttk);
+
+    limo.value = new Character(canvas.width - 100, canvas.height - 100, window.innerHeight * 0.1, window.innerHeight * 0.1, 'red', props.username2, enemyMaxHealth, enemyAttk);
 
     window.addEventListener('keydown', function (event) {
         moveHero(event.code);

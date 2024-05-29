@@ -23,7 +23,7 @@
         </div>
         <div v-if="isBothPlayersReady" class="d-flex flex-column align-items-center">
             <h2>Game</h2>
-            <GameComponent />
+            <GameComponent :username1="userLogged.username" :username2="userRandom.username" :character1="player1" :character2="player2" />
         </div>
     </div>
 </template>
