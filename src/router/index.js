@@ -21,7 +21,7 @@ const routes = [
     path: '/game',
     name: 'game',
     component: GameView,
-    meta: { requiresAuth: true }
+    //meta: { requiresAuth: true }
   },
   {
     path: '/records',
