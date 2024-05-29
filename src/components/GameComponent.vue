@@ -1,18 +1,20 @@
 <template>
     <div>
         <canvas ref="canvasRef"></canvas>
-        <div v-if="hero">
-            <h3>{{ hero.name }}</h3>
-            <div class="healthBar">
-                <div class="health" :style="`width: ${heroHealthPercentage}%;`"></div>
-                <div class="damage" :style="`width: ${heroDamagePercentage}%;`"></div>
+        <div class="d-flex w-full justify-content-between" >
+            <div v-if="hero">
+                <h3>{{ hero.name }}</h3>
+                <div class="healthBar">
+                    <div class="health" :style="`width: ${heroHealthPercentage}%;`"></div>
+                    <div class="damage" :style="`width: ${heroDamagePercentage}%;`"></div>
+                </div>
             </div>
-        </div>
-        <div v-if="limo">
-            <h3>{{ limo.name }}</h3>
-            <div class="healthBar">
-                <div class="health" :style="`width: ${limoHealthPercentage}%;`"></div>
-                <div class="damage" :style="`width: ${limoDamagePercentage}%;`"></div>
+            <div v-if="limo">
+                <h3>{{ limo.name }}</h3>
+                <div class="healthBar">
+                    <div class="health" :style="`width: ${limoHealthPercentage}%;`"></div>
+                    <div class="damage" :style="`width: ${limoDamagePercentage}%;`"></div>
+                </div>
             </div>
         </div>
     </div>
