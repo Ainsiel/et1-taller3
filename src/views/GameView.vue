@@ -59,10 +59,10 @@ const onButtonClicked = () => {
 const onCharacterSelected = (character, player) => {
     if(player === "player1"){
         player1.value = character
-        text1.value = text1.value + character
+        text1.value = `Seleccion Personaje ${userLogged.value.username}: ${character}`
     } else if(player === "player2"){
         player2.value = character
-        text2.value = text2.value + character
+        text2.value = `Seleccion Personaje ${userLogged.value.username}: ${character}`
     }
 }
 
