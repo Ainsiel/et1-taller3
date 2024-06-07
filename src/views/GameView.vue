@@ -29,6 +29,10 @@
             <GameComponent :username1="userLogged.username" :username2="userRandom.username" :character1="player1" :character2="player2" />
         </div>
     </div>
+    <audio autoplay loop>
+      <source :src="musicSrc" type="audio/mp3">
+      Tu navegador no soporta la reproducción de audio.
+    </audio>
 </template>
 
 <script setup>
@@ -72,6 +76,8 @@ onMounted(() => {
     text1.value = `Seleccion Personaje ${userLogged.value.username}: `
     text2.value = `Seleccion Personaje ${userRandom.value.username}: `
 })
+
+const musicSrc = 'src\assets\sounds\intense-background-music-relaxing-medieval-style-lofi-176284.mp3';
 
 </script>
 
