@@ -56,6 +56,10 @@
             </div>
         </div>
     </div>
+    <audio autoplay loop>
+      <source :src="musicSrc" type="audio/mp3">
+      Tu navegador no soporta la reproducción de audio.
+    </audio>
 </template>
 
 <script setup>
@@ -63,6 +67,8 @@ import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex';
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import RecordCard from '@/components/RecordCard.vue'
+
+const musicSrc = '/src/assets/sounds/medieval-star-188280.mp3';
 
 const store = useStore();
 

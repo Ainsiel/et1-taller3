@@ -26,7 +26,6 @@ import { Character } from '@/assets/character';
 import backgroundImage from '@/assets/background.png';
 import { useStore } from 'vuex';
 
-
 const props = defineProps({
     username1: String,
     username2: String,
