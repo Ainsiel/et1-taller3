@@ -2,9 +2,9 @@
     <div>
         <NavbarComponent />
     </div>
-    <div class="game">
-        <div v-if="isSelectingCharacter" class="container d-flex flex-column justify-content-center align-items-center w-100" style="height: 100vh;">
-            <div class="d-flex flex-column justify-content-center w-100" >
+    <div class="game my-5">
+        <div v-if="isSelectingCharacter" class="container d-flex flex-column justify-content-center align-items-center w-100 my-5" style="height: 100vh;">
+            <div class="d-flex flex-column justify-content-center w-100 my-5" >
                 <h3>{{ text1 }}</h3>
                 <div class="d-flex w-100 justify-content-around my-5">
                     <img src="@/assets/knight/idle.gif" style="max-width: 20vh; max-height: 20vh;" class="m-5 border border-5 border-secondary-subtle rounded w-100 h-100 " alt="Knight" @click="() => onCharacterSelected(`knight`, `player1`)">
