@@ -62,7 +62,7 @@ const onCharacterSelected = (character, player) => {
         text1.value = `Seleccion Personaje ${userLogged.value.username}: ${character}`
     } else if(player === "player2"){
         player2.value = character
-        text2.value = `Seleccion Personaje ${userLogged.value.username}: ${character}`
+        text2.value = `Seleccion Personaje ${userRandom.value.username}: ${character}`
     }
 }
 
